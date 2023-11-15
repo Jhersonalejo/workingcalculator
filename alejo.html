@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 110vh;
+            margin: 0;
+        }
+
+        .calculator {
+            width: 250px;
+            background-color:lightblue;
+            border: 1px solid ;
+            border-radius: 15px;
+            padding: 20px;
+            border-style: double;
+            border-width: 15px;
+            border-radius: 0s 0 50% 50%;
+            border-color: green blueviolet orange ;
+        }
+
+        .result {
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 25px;
+            border: 1px solid darkslategray;
+            padding: 8px;
+            border-width: 5px;
+            color: white;
+            border-style: solid;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 2fr);
+            grid-gap: 15px;
+        }
+
+        .button {
+            font-size: 23px;
+            padding: 3px;
+            text-align: center;
+            background-color: firebrick;
+            border-radius: 3px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .button:hover {
+            background-color: aqua;
+        }
+
+        
+
+
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="result" id="result">0</div>  
+        <div class="container">
+        <div class="buttons">
+            <div class="button">1</div>
+            <div class="button">2</div>
+            <div class="button">3</div>
+            <div class="button">C</div>
+            <div class="button">4</div>
+            <div class="button">5</div>
+            <div class="button">6</div>
+            <div class="button">-</div>
+            <div class="button">7</div>
+            <div class="button">8</div>
+            <div class="button">9</div>
+            <div class="button">+</div>
+            <div class="button">.</div>
+            <div class="button">0</div>
+            <div class="button">=</div>
+            <div class="button">*</div>
+          
+        </div>
+    </div>
+
+    <script>
+        var resultElement = document.getElementById("result");
+        var buttons = document.querySelectorAll(".button");
+        var currentInput = "";
+    
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                handleButtonClick(button.innerText);
+            });
+        });
+    
+        function handleButtonClick(value) {
+            switch (value) {
+                case "C":
+                    clearResult();
+                    break;
+                case "=":
+                    calculateResult();
+                    break;
+                default:
+                    appendSymbol(value);
+                    break;
+            }
+        }
+    
+    
+        function appendSymbol(symbol) {
+            currentInput += symbol;
+            updateResult();
+        }
+        function calculateResult() {
+            try {
+                currentInput = eval(currentInput).toString();
+            } catch (error) {
+                currentInput = "Error";
+            }
+            updateResult();
+        }
+    
+
+        function updateResult() {
+            resultElement.innerText = currentInput || "0";
+        }
+    
+        function clearResult() {
+            currentInput = "";
+            updateResult();
+        }
+        
+    </script>
+    
+</body>
+</html>
